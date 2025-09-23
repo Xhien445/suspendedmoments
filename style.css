@@ -1,0 +1,408 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+/* Default hidden */
+.scene, .welcome-container {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Visible state */
+.scene.visible, .welcome-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cursor rainbow trail */
+.trail {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+  animation: fade-trail 0.6s linear forwards;
+  z-index: 2000; /* stay above */
+}
+
+@keyframes fade-trail {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+}
+
+
+/* Welcome section */
+.welcome-container {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;   /* limit max size */
+  aspect-ratio: 1440 / 1024; /* preserve image ratio */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   margin-bottom: 300px;
+}
+
+/* base mat (upper eyelid layer) */
+.mat {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;   /* scales with container */
+  height: 100%;
+  object-fit: contain;
+  z-index: 2;
+}
+
+/* eye-move group (scales together) */
+.eye-move {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;   /* same size as mat */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+/* trongden image */
+.trongden {
+  position: relative;
+  width: 40%;   /* adjust relative size */
+  height: auto;
+}
+
+/* text inside trongden */
+.welcome-text {
+  position: absolute;
+  color: white;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 64px;   /* fixed size */
+  font-style: italic;
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.1;  /* tighter spacing between lines */
+  animation: fadeInOut 4s infinite;
+}
+
+/* Scene 1 */
+.scene1 {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 100px 20px; /* more breathing room */
+   margin-bottom: 300px;
+}
+
+.scene-text {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 300; /* Light */
+  font-size: 36px;
+  color: black;
+  margin-bottom: 40px;
+  line-height: 1.4;
+}
+
+.scene-subtext {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 200;
+  font-size: 24px;
+  color: #555;
+  margin-top: 20px;
+  opacity: 1; /* 👈 make visible by default */
+  
+}
+
+.scene1 .scene-subtext {
+  opacity: 0; /* hidden by default in scene1 */
+}
+
+
+.scene1 .scene-subtext.visible {
+  opacity: 1;
+  animation: fadePulse 2s ease-in-out infinite;
+}
+
+
+.scene-subtext.visible {
+  opacity: 1;
+  animation: fadePulse 2s ease-in-out infinite;
+}
+
+@keyframes fadePulse {
+  0%   { opacity: 0.2; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+
+.light-button {
+  width: 120px;
+  max-width: 20vw;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .welcome-text {
+    font-size: 40px;
+  }
+  .scene-text {
+    font-size: 24px;
+  }
+  .scene-subtext {
+    font-size: 16px;
+  }
+  .light-button {
+    width: 90px;
+  }
+}
+/* Glitch overlay with jitter + RGB ghosting */
+.glitch-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9999;
+}
+
+.glitch-overlay.active {
+  opacity: 1;
+  animation: glitchOverlay 0.3s infinite, rgbShift 0.25s infinite;
+}
+
+/* Jitter motion */
+@keyframes glitchOverlay {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-5px, 5px); }
+  40%  { transform: translate(5px, -5px); }
+  60%  { transform: translate(-5px, -5px); }
+  80%  { transform: translate(5px, 5px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* RGB ghosting effect */
+@keyframes rgbShift {
+  0%   { filter: none; }
+  25%  { filter: drop-shadow(-2px 0 red) drop-shadow(2px 0 cyan); }
+  50%  { filter: drop-shadow(2px 0 blue) drop-shadow(-2px 0 lime); }
+  75%  { filter: drop-shadow(-3px 0 magenta) drop-shadow(3px 0 yellow); }
+  100% { filter: none; }
+}
+
+/* Background flicker */
+body.glitching {
+  animation: bgFlicker 0.15s infinite;
+}
+
+@keyframes bgFlicker {
+  0%   { background-color: black; }
+  50%  { background-color: white; }
+  100% { background-color: black; }
+}
+
+/* Scene 3 */
+.scene3 {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 80px 20px;
+   margin-bottom: 300px;
+}
+
+.shapes-container {
+  position: relative;
+  width: 100%;
+  height: 500px; /* taller to fit larger shapes */
+  margin-top: 40px;
+}
+
+.shape {
+  position: absolute;
+  cursor: grab;
+  width: 160px;
+  height: 160px;
+  opacity: 0.8;
+  animation: floaty 6s ease-in-out infinite;
+}
+
+/* Circle */
+.circle {
+  background: red;
+  border-radius: 50%;
+  top: 60px;
+  left: 18%;
+}
+
+/* Square */
+.square {
+  background: blue;
+  top: 200px;
+  left: 42%;
+}
+
+/* Triangle */
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 90px solid transparent;   /* bigger */
+  border-right: 90px solid transparent;
+  border-bottom: 160px solid yellow;
+  top: 100px;
+  left: 65%;
+}
+
+/* Floating color text */
+.color-fx {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.2);
+  font-size: 64px; /* slightly larger text */
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 2s ease-out;
+  z-index: 1000;
+}
+.color-fx.show {
+  opacity: 0.6;
+  transform: translate(-50%, -50%) scale(8);
+}
+/* Floating animation */
+@keyframes floaty {
+  0%   { transform: translateY(0px) scale(1); }
+  25%  { transform: translateY(-10px) scale(1.02); }
+  50%  { transform: translateY(0px) scale(1); }
+  75%  { transform: translateY(10px) scale(0.98); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+.circle { animation-delay: 0s; }
+.square { animation-delay: 1s; }
+.triangle { animation-delay: 2s; }
+
+
+/* Scene 4 bubble container */
+.bubbles-container {
+  position: relative;
+  width: 100%;
+  height: 700px; /* enough space for floating */
+  overflow: hidden;
+}
+
+/* Each bubble */
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  background: url("assets/scene4/bubble.png") no-repeat center/contain;
+  background-size: contain;
+  opacity: 0.8;
+  cursor: pointer;
+  animation: floatUp 8s linear forwards;
+  z-index: 10; /* ensure above background */
+}
+
+.scene4 .scene-text {
+ 
+  text-align: center; /* make sure centered */
+}
+@keyframes floatUp {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: translateY(-120vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Subtext fade in/out */
+.scene4 .scene-subtext {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 200;
+  margin-top: 20px;
+  color: #555;
+  text-align: center;
+  opacity: 1; /* start hidden */
+  animation: fadeInOut 4s infinite;
+}
+.scene3 .scene-subtext {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 200;
+  margin-top: 20px;
+  color: #555;
+  text-align: center;
+  opacity: 1; /* start hidden */
+  animation: fadeInOut 4s infinite;
+}
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+.scene4 {
+  margin-bottom: 150px; /* adds space after the scene */
+}
+/* Hide everything except Scene 2 subtext AND light button when lights are OFF */
+body.lights-off .welcome-container,
+body.lights-off .scene1 .scene-text,
+body.lights-off .scene1 .scene-subtext,
+body.lights-off .scene3,
+body.lights-off .scene4,
+body.lights-off .glitch-overlay {
+  opacity: 0;
+  transition: none !important; /* instant hide */
+}
+
+/* keep button visible */
+body.lights-off .scene1 .light-button {
+  opacity: 1 !important;
+  
+}
+
+
+/* Hide EVERYTHING during glitch, except the button */
+body.glitching .welcome-container,
+body.glitching .scene1 .scene-text,
+body.glitching .scene1 .scene-subtext,
+body.glitching .scene2,
+body.glitching .scene3,
+body.glitching .scene4 {
+  opacity: 0;
+  transition: none !important; /* instant hide */
+}
+
+/* keep button visible */
+body.glitching .scene1 .light-button {
+  opacity: 1 !important;
+}

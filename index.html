@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/scene4/bubble.png">
+  <title>Suspended Moments</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <!-- Welcome Section -->
+  <div class="welcome-container scene">
+    <div class="eye-move">
+      <img src="assets/welcome/trongden.png" alt="Trongden" class="trongden">
+      <div class="welcome-text">Suspended<br>moments</div>
+    </div>
+    <img src="assets/welcome/mat.png" alt="Mat" class="mat">
+  </div>
+
+  <!-- Scene 1 (button) -->
+  <div class="scene1 scene">
+    <div class="scene-text">
+      This is a light button in my home.<br>
+      It is now on.<br>
+      I wonder if I can balance it, what will happen?
+    </div>
+    <img src="assets/scene1/on button.png" alt="Light Button" class="light-button">
+    <div class="scene-subtext">Hover and hold the button for 3s to balance the button</div>
+  </div>
+
+   <!-- Scene 3 (draggable shapes) -->
+  <div class="scene3 scene">
+  <div class="scene-text">
+    I love art.<br>
+    Look how amazing colors can be!
+  </div>
+  <div class="shapes-container">
+    <div class="shape circle" data-color="red"></div>
+    <div class="shape square" data-color="blue"></div>
+    <div class="shape triangle" data-color="yellow"></div>
+    <div class="color-text"></div> <!-- 👈 text display here -->
+  </div>
+  <div class="scene-subtext">Drag the shapes to overlap and create new colors.</div>
+</div>
+  
+<!-- Scene 4 (Bubbles) -->
+<div class="scene4 scene">
+  <div class="scene-text">
+    I don’t understand how can things disappear.<br>
+    I don’t like things to go away from me
+  </div>
+  <div class="bubbles-container"></div>
+  <div class="scene-subtext">Click to pop the bubbles.</div>
+</div>
+
+
+  <!-- Glitch overlay -->
+  <div class="glitch-overlay"></div>
+  <script src="java.js"></script>
+</body>
+</html>
