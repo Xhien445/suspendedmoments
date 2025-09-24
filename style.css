@@ -406,3 +406,127 @@ body.glitching .scene4 {
 body.glitching .scene1 .light-button {
   opacity: 1 !important;
 }
+
+/* 📱 Tablet */
+@media (max-width: 768px) {
+  .welcome-text {
+    font-size: 40px;
+  }
+  .scene-text {
+    font-size: 24px;
+    padding: 0 10px;
+  }
+  .scene-subtext {
+    font-size: 16px;
+  }
+  .light-button {
+    width: 90px;
+  }
+
+  /* shapes smaller */
+  .shape {
+    width: 120px;
+    height: 120px;
+  }
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-bottom: 120px solid yellow;
+  }
+
+  .shapes-container {
+    height: 500px;
+  }
+
+  .color-fx {
+    font-size: 40px;
+  }
+
+  .bubble {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .bubbles-container {
+  height: 600px; /* enough space for floating */
+ 
+}
+
+.welcome-container {
+    margin-bottom: 250px;
+    margin-top: 250px;
+  }
+  .scene4 {
+    margin-bottom: 10px;
+    margin-top: 150px;
+    padding: 60px 10px;
+  }
+
+}
+
+/* 📱 Phone */
+@media (max-width: 480px) {
+  .welcome-text {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  .scene-text {
+    font-size: 18px;
+  }
+  .scene-subtext {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .light-button {
+    width: 70px;
+  }
+
+  /* shrink shapes further */
+  .shape {
+    width: 80px;
+    height: 80px;
+  }
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 90px solid yellow;
+  }
+
+  .shapes-container {
+    height: 250px;
+  }
+
+  .color-fx {
+    font-size: 28px;
+  }
+
+  /* bubbles smaller for phone */
+  .bubble {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  /* reduce margins */
+  .scene1,
+  .scene3 {
+    margin-bottom: 150px;
+    margin-top: 150px;
+    padding: 60px 10px;
+  }
+  .welcome-container {
+    margin-bottom: 300px;
+    margin-top: 60%;
+  }
+  .scene4 {
+    margin-bottom: 10px;
+    margin-top: 150px;
+    padding: 60px 10px;
+  }
+  .bubbles-container {
+  height: 600px; /* enough space for floating */
+ 
+}
+}
